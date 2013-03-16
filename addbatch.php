@@ -7,14 +7,19 @@ if(empty($_POST['submit']) || empty($_POST['bid']) || empty($_POST['tname']))
 
 <h3> Fill the batch details</h3>
 
-<body bgcolor=grey>
 
 <form method="POST">
 
 Batchid: <input type="text" name="bid" />
 <br><br>
 
-Trainer name : <input type="text" name="tname" />
+Trainer name : 
+<select name="tname" >
+        <option value="">Select Trainer</option>
+        <option value="1">Megha Garg</option>
+        <option value="2">Manish Nautiyal</option>
+        <option value="3">Manish Saini</option>
+        </select>
 <br><br>
 
 
