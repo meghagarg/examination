@@ -1,4 +1,7 @@
 <?php
+$myFile = "file.txt";
+$fh = fopen($myFile, 'a') or die("can't open file");
+
 if(empty($_POST['submit']))
 {
 ?>
@@ -57,5 +60,10 @@ echo "<br>Email id :- $email";
 echo "<br>Batch id : - $batchid";
 echo "<br>Username : - $username";
 echo "<br>password : - $pass";
+$uname=$username."-";
+$batchid=$batchid."\n";
+fwrite($fh, $uname);
+fwrite($fh, $batchid);
+fclose($fh);
 }
 ?>

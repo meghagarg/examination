@@ -1,41 +1,7 @@
 <?php
 session_start();
-$searchthis = $_SESSION['uid'];
-
-$handle = fopen("file.txt", "r");
-if ($handle)
-{
-    while (!feof($handle))
-    {
-        $buffer = fgets($handle);
-        if(strpos($buffer, $searchthis) !== FALSE)
-            $matches = $buffer;
-    }
-    fclose($handle);
-}
-
-$batchname = explode("-", $matches);
-
-$searchthis1 = $batchname[1];
-
-$handle1 = fopen("mo.txt", "r");
-if ($handle1)
-{
-    while (!feof($handle1))
-    {
-        $buffer = fgets($handle1);
-        if(strpos($buffer, $searchthis1) !== FALSE)
-            $matches1 = $buffer;
-    }
-    fclose($handle1);
-}
-
-$ks1 = explode("-", $matches1);
-$module=$ks1[0];
-$unit=$ks1[1];
-
-//$module=$_POST['module'];
-//$unit=$_POST['unit'];
+$module=$_POST['module'];
+$unit=$_POST['unit'];
 if(!isset($_GET['submit']) )
 {
 
@@ -55,7 +21,7 @@ $_SESSION['muid']="mod1u1";
 ?>
 <tr><td colspan='4'>Ques.1 Which of the following below is true functionalities of shell?</td></tr>
           <tr><td >&nbsp;<input type='radio' id='qid1' name='qid1' value='a'>Authenticates user</td>
-               <td>&nbsp;<input type='radio' id='qid1' name='qid1' value='b'> Interprets commands</td>
+              <td>&nbsp;<input type='radio' id='qid1' name='qid1' value='b'> Interprets commands</td>
               <td>&nbsp;<input type='radio' id='qid1' name='qid1' value='c'>Allocates time and memory to programs</td>
               <td>&nbsp;<input type='radio' id='qid1' name='qid1' value='d'>only a and b </td>
                  </tr>
@@ -94,7 +60,7 @@ $_SESSION['muid']="mod1u2";
 }
 ?>
 </table>
-<br><br>       <input type='submit' name='submit' value='submit' > 
+       <input type='submit' name='submit' value='submit' > 
 
        
 </form>
