@@ -1,6 +1,6 @@
 <?php
 session_start();
-$searchthis = $_SESSION['uid'];
+$searchbat = $_SESSION['uid'];
 
 $handle = fopen("file.txt", "r");
 if ($handle)
@@ -8,7 +8,7 @@ if ($handle)
     while (!feof($handle))
     {
         $buffer = fgets($handle);
-        if(strpos($buffer, $searchthis) !== FALSE)
+        if(strpos($buffer, $searchbat) !== FALSE)
             $matches = $buffer;
     }
     fclose($handle);

@@ -1,16 +1,6 @@
 <?php
 $bid=$_GET['bid'];
-$file = file("mo.txt");
-$newLines = array();
-foreach ($file as $line)
-    if (preg_match("/$bid/", $line) === 0)
-        $newLines[] = chop($line);
-$newFile = implode("\n", $newLines);
-file_put_contents("mo.txt", $newFile);
-
-
 $myFile = "mo.txt";
-
 $fh = fopen($myFile, 'a') or die("can't open file");
 
 if(empty($_POST['submit']))
@@ -106,7 +96,7 @@ $unit=$_POST[unit];
 $bid=$_GET['bid'];
 echo "Updated module-unit for exam is ".$mod.' '.$unit.' for batch '.$bid;
 
-$mod="\n".$mod."-";
+$mod=$mod."-";
 $unit=$unit."-";
 $bid=$bid."\n";
 fwrite($fh, $mod);
