@@ -1,4 +1,5 @@
 <?php
+include 'basic.php';
 if(empty($_POST['submit']) || empty($_POST['bid']) || empty($_POST['tname']))
 {
         ?>
@@ -12,14 +13,20 @@ if(empty($_POST['submit']) || empty($_POST['bid']) || empty($_POST['tname']))
 
 Batchid: <input type="text" name="bid" />
 <br><br>
+Select Trainer:&nbsp;&nbsp;
+            <?php
+            $query='select * from registration where type="teacher"';
+            $result=mysql_query($query);
+            echo"<select name='tname'>";
+           echo "<option value='-1'>select Trainer</option>";
+         while ($row = mysql_fetch_object($result))
+               {
 
-Trainer name : 
-<select name="tname" >
-        <option value="">Select Trainer</option>
-        <option value="1">Megha Garg</option>
-        <option value="2">Manish Nautiyal</option>
-        <option value="3">Manish Saini</option>
-        </select>
+           echo"<option value='$row->r_no'>$row->Full_name</option>";
+               }
+           echo"</select>";
+?>
+
 <br><br>
 
 
@@ -38,8 +45,11 @@ else {
 $bid=$_POST[bid];
 
 $tname=$_POST[tname];
+$query="insert into batch(batch_id,trainer_id) values ('$bid','$tname')";
+    $result=mysql_query($query) or die("error in query");
+    echo"your record added $result";
 
-echo "your batch is added with batch id '$bid' and trainer name '$tname'";
+#echo "your batch is added with batch id '$bid' and trainer name '$tname'";
 }
 ?>
 

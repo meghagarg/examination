@@ -14,4 +14,6 @@ echo '<br><a href=managques.php> Manage Questions</a>';
 echo '<br><a href=showques.php>Show Questions</a>';
 echo '<br> <a href=updatstat.php>Update syllabus</a>';
 echo '<br><a href=mybatlist.php>My Batches</a>';
+echo '<br><a href=logout.php>Logout</a>';
+
 ?>
