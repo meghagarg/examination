@@ -1,30 +1,20 @@
 <?php
+include 'basic.php';
+$sid=$_GET['sid'];
 
 if(!isset($_GET['submit']))
-
 {
-$sid=$_GET['sid'];
-if($sid == '1')
+$query="select * from student where sid='$sid'";
+$result=mysql_query($query);
+while($row=mysql_fetch_object($result))
 {
- $fname="Anisha";
- $lname="Anand";
- $contact="773299912";
- $email="anish.anand@gmail.com";
- $batch_id="MMR44";
- $usernmae="Anisha77329";
- $pass="1234";
-     
-      }
-else
-{
-$fname="Amit";
- $lname="Kumar";
- $contact="992231233";
- $email="amit.kumar@gmail.com";
- $batch_id="MWF12";
- $username="Amit99223";
- $pass="1234";
+$fname=$row->fname;
+$lname=$row->lname;
+$contact=$row->contact;
+$email=$row->email_id;
+$batch_id=$row->batch_id;
 }
+
 ?>
 <html><head>
        
@@ -36,14 +26,21 @@ $fname="Amit";
              Last name<input type="text" value="<?php echo $lname;?>" name="llname"><br>
                 Contact <input type="text" value="<?php echo $contact;?>" name="ccontact"><br>
                  Email id <input type="text" value="<?php echo $email; ?>" name="eemail"><br>                 
-                  Select Batch id:
+select Batch id:
+            <?php
+            $query='select * from batch ';
+            $result=mysql_query($query);
+            echo"<select name='batid'>";
+           echo "<option value='$batch_id'>$batch_id</option>";
+         while ($row = mysql_fetch_object($result))
+               {
 
-            <select name='batid'>
-           <option value='-1'><?php echo $batch_id;?></option>
-           <option value='MWF12'>MWF12</option>
-           <option value='MMR44'>MMR44</option>
-</select>                     
-         
+           echo"<option value='$row->batch_id'>$row->batch_id</option>";
+               }
+           echo"</select>";
+?>
+<input type="hidden" value="<?php echo $sid;?>" name="hfid">
+
                        <input type="submit" name="submit" value="edit">
 
             </form></body>
@@ -52,19 +49,15 @@ $fname="Amit";
                 }
                 else
                 {
-                
+                      $id=$_GET['hfid'];
                 	$ffname=$_GET['ffname'];
                 	$llname=$_GET['llname'];
                     $ccontact=$_GET['ccontact'];
                     $eemail=$_GET['eemail'];
                 	$bbatid=$_GET['batid'];
-                	echo "Edited value of student are :-<br>";
-                	echo "First name : $ffname <br>";
-                echo "Last name : $llname<br>";
-                echo "Conatct : $ccontact<br>";
-                echo "Email : $eemail<br>";
-                echo "Batch id : $bbatid";
-                
-                }
+               $query="update student set fname='$ffname', lname='$llname', contact='$ccontact',email_id='$eemail',batch_id='$bbatid' where sid='$id'";
+mysql_query($query);
+echo "<script language='javascript'>window.location='showstud.php';</script>";                
+}
                 ?>
                    

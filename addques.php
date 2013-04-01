@@ -1,11 +1,12 @@
 <?php
+include 'basic.php';
 if(empty($_POST['submit']))
 {
 ?>
 
 <html>
 <head>
-<title>country state dropdown</title>
+<title></title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <script language="javascript" type="text/javascript">
 function getXMLHTTP() { 
@@ -107,18 +108,10 @@ $ans4=$_POST[ans4];
 $cans=$_POST[cans];
 $mod=$_POST[module];
 $unit=$_POST[unit];
-echo "Question is added with information";
-echo "<br>Question :-$ques";
-echo "<br>First answer :- $ans1";
-echo "<br>Second answer :- $ans2";
-echo "<br>Third answer : - $ans3";
-echo "<br>Fourth answer : - $ans4";
-echo "<br>Correct answer : - $cans";
-echo "<br>Module : - $mod ";
-echo "<br>Unit : - $unit";
+
+$query="insert into question(ques,ans1,ans2,ans3,ans4,cans,module,unit) values('$ques','$ans1','$ans2','$ans3','$ans4','$cans','$mod','$unit')";
+mysql_query($query);
+echo "<script language='javascript'>window.location='showques.php';</script>";
 
 }
-
 ?>
-                                                                        
-    

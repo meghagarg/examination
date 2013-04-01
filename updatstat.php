@@ -1,22 +1,31 @@
-<html>
-<title></title>
-<body>
 <?php
+session_start();
+include 'basic.php';
+$uid=$_SESSION['uid'];
 if(empty($_POST['submit']) || empty($_POST['bid']))
 {
         ?>
+<html>
+<title></title>
+<body>
 <h3> Select the batch for which you want to update syllabus</h3>
 
 <form name="form1" method="post" >
-<select name="bid" >
+Select Batch id:
+            <?php
+            $query="select b_no,batch_id from batch,registration where trainer_id=r_no and uname='$uid' ";
+            $result=mysql_query($query) or die("error in query");
+            echo"<select name='bid'>";
+           echo "<option value='-1'>select Batch</option>";
+         while ($row = mysql_fetch_object($result))
+               {
 
-        <option value="">Select Batch Id</option>
-        <option value="1">MWF14</option>
-        <option value="2">MWW19</option>
-        <option value="3">WF152</option>
-
-        </select>
-  <br><br>
+           echo"<option value='$row->batch_id'>$row->batch_id</option>";
+               }
+           echo"</select>";
+?>
+  
+<br><br>
 <input type="submit" name="submit" />
     </form>
 

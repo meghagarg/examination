@@ -1,7 +1,5 @@
 <?php
-$myFile = "file.txt";
-$fh = fopen($myFile, 'a') or die("can't open file");
-
+include 'basic.php';
 if(empty($_POST['submit']))
 {
 ?>
@@ -23,12 +21,19 @@ Phone number : <input type="text" name="contact" />
 Email Id : <input type="text" name="emailid" />
 <br><br>
 Select Batch id:
+            <?php
+            $query='select * from batch ';
+            $result=mysql_query($query);
+            echo"<select name='batid'>";
+           echo "<option value='-1'>select Batch</option>";
+         while ($row = mysql_fetch_object($result))
+               {
 
-            <select name='batid'>
-           <option value='-1'>select Batch</option>
-           <option value='MWF12'>MWF12</option>
-           <option value='MMR44'>MMR44</option>
-</select>
+           echo"<option value='$row->batch_id'>$row->batch_id</option>";
+               }
+           echo"</select>";
+?>
+
 
 
 <br><br>
@@ -52,18 +57,12 @@ $batchid=$_POST[batid];
 $res = substr($contact, 0, 5);
 $username=$fname.$res;
 $pass="1234";
-echo "Student is added with information ";
-echo "<br>First name :-$fname";
-echo "<br>Last Name : - $lname";
-echo "<br>Contact :- $contact";
-echo "<br>Email id :- $email";
-echo "<br>Batch id : - $batchid";
-echo "<br>Username : - $username";
-echo "<br>password : - $pass";
-$uname=$username."-";
-$batchid=$batchid."\n";
-fwrite($fh, $uname);
-fwrite($fh, $batchid);
-fclose($fh);
+$full_name=$fname.' '.$lname;
+$query="insert into student(fname,lname,contact,email_id,batch_id,uname) values('$fname','$lname','$contact','$email','$batchid','$username')";
+mysql_query($query);
+$query1="insert into registration(uname,passwd,type,Full_name) values('$username','$pass','student','$full_name')";
+mysql_query($query1);
+echo "<script language='javascript'>window.location='showstud.php';</script>";
+
 }
 ?>

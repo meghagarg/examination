@@ -1,50 +1,20 @@
 <?php
-
+include 'basic.php';
 if(!isset($_GET['submit']))
 
 {
 $qid=$_GET['qid'];
-if($qid == '11')
+$query="select * from question where qid='$qid'";
+$result=mysql_query($query);
+while($row=mysql_fetch_object($result))
 {
- $ques="Which of the following below is true functionalities of shell?";
- $ans1="Authenticates user";
- $ans2="Interprets commands";
- $ans3="Allocates time and memory to programs";
- $ans4="only a and b";
- $cans="Interprets commands";
- 
 
-      }
-else if($qid=='12')
-{
-$ques="The command used to change file permissions from the command line is?";
- $ans1="perm";
- $ans2="setperm";
- $ans3="setmod";
- $ans4="chmod";
- $cans="chmod";
- 
-}
-
-else if($qid=='21')
-{
-	$ques="Which of the following below are true functionalities of Kernel?";
-	$ans1="Allocates time and memory to programs";
-	$ans2="Authenticates user";
-	$ans3="Interprets commands";
-	$ans4="All of the above";
-	$cans="Allocates time and memory to programs";
-
-}
-
-else if($qid=='22')
-{
-	$ques="What is the Package name to use LVM graphically ?";
-	$ans1="system-config-lvm";
-	$ans2="system-lvm-config";
-	$ans3="system-configuartion-lvm";
-	$ans4="All of these";
-	$cans="system-config-lvm";
+	$ques=$row->ques;
+	$ans1=$row->ans1;
+	$ans2=$row->ans2;
+	$ans3=$row->ans3;
+	$ans4=$row->ans4;
+$cans=$row->cans;
 }
 ?>
 <html><head>
@@ -59,6 +29,7 @@ else if($qid=='22')
                  Third Answer <input type="text" value="<?php echo $ans3; ?>" name="aans3"><br>
                 Fourth Answer <input type="text" value="<?php echo $ans4; ?>" name="aans4"><br>
                  Correct answer <input type="text" value="<?php echo $cans; ?>" name="ccans"><br>
+<input type="hidden" value="<?php echo $qid;?>" name="hfid">
 
                        <input type="submit" name="submit" value="edit">
 
@@ -68,6 +39,7 @@ else if($qid=='22')
                 }
                 else
                 {
+                      $id=$_GET['hfid'];
 
                         $qqname=$_GET['qqname'];
                         $aans1=$_GET['aans1'];
@@ -75,13 +47,11 @@ else if($qid=='22')
                     $aans3=$_GET['aans3'];
                         $aans4=$_GET['aans4'];
                         $ccans=$_GET['ccans'];
-                        echo "Edited value of questions are :-<br>";
-                        echo "Question : $qqname <br>";
-                echo "First answer : $aans1<br>";
-                echo "Second Answer : $aans2<br>";
-                echo "Third Answer : $aans3<br>";
-                echo "Third answer : $aans4<br>";
-                echo "Fourth answer : $ccans";
-                }
+                
+ $query="update question set ques='$qqname', ans1='$aans1', ans2='$aans2',ans3='$aans3',ans4='$aans4',cans='$ccans' where qid='$id'";
+mysql_query($query);
+echo "<script language='javascript'>window.location='showques.php';</script>";
+
+}
                 ?>
                   

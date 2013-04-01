@@ -25,7 +25,7 @@ Select Trainer:&nbsp;&nbsp;
             $query1='select * from registration where type="teacher"';
             $result1=mysql_query($query1);
             echo"<select name='ttname'>";
-           echo "<option value='-1'>$tname</option>";
+           echo "<option value='-1'>Select Teacher</option>";
          while ($row1 = mysql_fetch_object($result1))
                {
 
@@ -33,7 +33,7 @@ Select Trainer:&nbsp;&nbsp;
                }
            echo"</select>";
 ?>
-
+<input type="hidden" value="<?php echo $bid;?>" name="hfid">
                        <input type="submit" name="submit" value="edit">
 
             </form></div></body>
@@ -42,14 +42,13 @@ Select Trainer:&nbsp;&nbsp;
                 }
                 else
                 {
+$id=$_GET['hfid'];
 
                 	$bbid=$_GET['bbid'];
                 	$ttname=$_GET['ttname'];
-                
-               $query="update batch set batch_id='$bbid' and tariner_id='$ttname' where b_no='$bid'";
+               $query="update batch set batch_id='$bbid', trainer_id='$ttname' where b_no='$id'";
 mysql_query($query);
-echo $query;
-#echo "<script language='javascript'>window.location='showbatch.php';</script>";
+echo "<script language='javascript'>window.location='showbatch.php';</script>";
  
                 
                 }
