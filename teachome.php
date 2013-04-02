@@ -1,13 +1,12 @@
 <?php
 session_start();
+include 'basic.php';
 $uid=$_SESSION['uid'];
-if($uid=="megha")
-$name="Megha Garg";
-if($uid=="manishn")
-$name="Manish Nautiyal";
-if($uid=="manishs")
-$name="Manish Saini";
-echo "<center><h1><font color='green'> WELCOME ".$name."</font></h1></center>";
+ $query="select * from registration where uname='$uid'";
+  $result=mysql_query($query) or die("error in query");
+$row = mysql_fetch_object($result);
+$name=$row->Full_name;
+echo "<center><h1><font color='green'> WELCOME  ".$name."</font></h1></center>";
 
 echo '<br><a href=addques.php>Add Questions</a>';
 echo '<br><a href=managques.php> Manage Questions</a>';

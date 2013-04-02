@@ -1,4 +1,5 @@
 <?php
+include 'basic.php';
 if(empty($_POST['submit']))
 {
 ?>
@@ -11,12 +12,18 @@ if(empty($_POST['submit']))
 
 <form method="POST">
 Select Batch id:
+            <?php
+            $query='select * from batch ';
+            $result=mysql_query($query);
+            echo"<select name='batid'>";
+           echo "<option value='-1'>select Batch</option>";
+         while ($row = mysql_fetch_object($result))
+               {
 
-            <select name='batid'>
-           <option value='-1'>select Batch</option>
-           <option value='MWF12'>MWF12</option>
-           <option value='MMR44'>MMR44</option>
-</select>
+           echo"<option value='$row->batch_id'>$row->batch_id</option>";
+               }
+           echo"</select>";
+?>
 
 <br><br>
 <input type="submit" name="submit" />
@@ -29,22 +36,21 @@ Select Batch id:
 else {
 
 $batid=$_POST['batid'];
-if($batid=="MWF12")
-{
-	echo"<center><table border='6' align='center'>";
-	echo '<tr><th>First Name</th><th>Last Name</th><th>Contact</th><th>Email id</th><th>Batch Id</th><th>Username</th><th>Password</th></tr>';
-	echo '<tr><td>Anisha</td><td>Anand</td><td>773299912</td><td>anisha.anand@gmail.com</td><td>MMR44</td><td>Anisha77329</td><td>1234</td><tr>';
-	
-	echo '<tr><td>Neha</td><td>Garg</td><td>677241342</td><td>neha.garg12@gmail.com</td><td>MMR44</td><td>Neha67724</td><td>1234</td></tr>';
-	echo"</table></center>";
+$query="select * from student where batch_id='$batid'";
+    $result= mysql_query($query)or die("error in query");
+    if(mysql_num_rows($result)>0)
+    {
+    echo"<center><table border='10' align='center'> ";
+    echo"<tr><th>First Name</th><th>Last Name</th><th>Conatct</th><th>Email id</th><th> Batch id</th><th>Username</th></tr>";
+
+    while($row=mysql_fetch_object($result))
+    {
+        echo"<tr>";
+     echo"<td>$row->fname</td><td>$row->lname</td><td>$row->contact</td><td>$row->email_id</td><td>$row->batch_id</td><td>$row->uname</td></tr>";
+
+    }
+    echo"</table></center>";
+    }
 	
 }
-else 
-{
-	echo"<center><table border='6' align='center'>";
-	echo '<tr><th>First Name</th><th>Last Name</th><th>Contact</th><th>Email id</th><th>Batch Id</th><th>Username</th><th>Password</th></tr>';
-	echo '<tr><td>Amit</td><td>Kumar</td><td>992231233</td><td>amit.kumar@gmail.com</td><td>MWF12</td><td>Amit99223</td><td>1234</td></tr>';
-	echo '<tr><td>Neeraj</td><td>Yadav</td><td>781213134</td><td>neerajyad12@gmail.com</td><td>MWF12</td><td>Neeraj78121</td><td>1234</td></tr>';
-	echo"</table></center>";
-}
-}	
+?>

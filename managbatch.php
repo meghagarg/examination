@@ -10,7 +10,7 @@ $query="select b_no,batch_id,Full_name from batch,registration where trainer_id=
     while($row=mysql_fetch_object($result))
     {
         echo"<tr>";
-     echo"<td>$row->batch_id</td><td>$row->Full_name</td><td><a href='editbatch.php?b_no=$row->b_no'>edit</a></td><td><a href='deletebatch.php?bid=b_no'>delete</td></tr>";
+     echo"<td>$row->batch_id</td><td>$row->Full_name</td><td><a href='editbatch.php?b_no=$row->b_no'>edit</a></td><td><a href='deletebatch.php?b_no=$row->b_no'>delete</td></tr>";
 
     }
     echo"</table></center>";
