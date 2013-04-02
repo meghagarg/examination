@@ -33,17 +33,16 @@ Select Batch id:
 }
 else {
 $bid=$_POST[bid];
+$_SESSION['bid']=$bid;
 $query="select * from batch_status where batch_id='$bid'";
 $result=mysql_query($query) or die("error in query1");
 $row=mysql_fetch_object($result);
-#$mod1=array();
 $mod1=$row->mod1;
-#$mod2=array();
 $mod2=$row->mod2;
-#$mod3=array();
 $mod3=$row->mod3;
 $mod1=explode(",",$mod1);
-echo $mod1[4];
+$mod2=explode(",",$mod2);
+$mod3=explode(",",$mod3);
 ?>
 <form name="form2" action="check.php" method="post" >
 1. Module 1
@@ -51,31 +50,35 @@ echo $mod1[4];
 <?php
 for($i=1;$i<=23;$i++)
 {
-?>
-<input type="checkbox" name=<?php echo$i; ?>>Unit<?php echo$i; ?></input>
-<?php
+if (in_array($i, $mod1)) 
+echo"<input type='checkbox' name='1u$i' checked>Unit $i</input>&nbsp;&nbsp;";
+else
+echo"<input type='checkbox' name='1u$i'>Unit $i</input>&nbsp;&nbsp;";
 }
 ?>
 <br><br>
 2. Module 2
 <br>
 <?php
-for($i=1;$i<=10;$i++)
+for($i=1;$i<=18;$i++)
 {
-?>
-<input type="checkbox" name=<?php echo$i; ?>>Unit<?php echo$i; ?></input>
-<?php
+if (in_array($i, $mod2)) 
+echo"<input type='checkbox' name='2u$i' checked>Unit $i</input>&nbsp;&nbsp;";
+else
+echo"<input type='checkbox' name='2u$i'>Unit $i</input>&nbsp;&nbsp;";
 }
 ?>
+
 <br><br>
 3. Module 3
 <br>
 <?php
 for($i=1;$i<=19;$i++)
 {
-?>
-<input type="checkbox" name=<?php echo$i; ?> >Unit<?php echo$i; ?></input>
-<?php
+if (in_array($i, $mod3)) 
+echo"<input type='checkbox' name='3u$i' checked>Unit $i</input>&nbsp;&nbsp;";
+else
+echo"<input type='checkbox' name='3u$i'>Unit $i</input>&nbsp;&nbsp;";
 }
 ?>
 
