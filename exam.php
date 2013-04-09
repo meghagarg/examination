@@ -1,39 +1,43 @@
 <?php
 session_start();
 $searchbat = $_SESSION['uid'];
+include 'basic.php';
+#$handle = fopen("file.txt", "r");
+#if ($handle)
+#{
+#    while (!feof($handle))
+ #   {
+  #      $buffer = fgets($handle);
+   #     if(strpos($buffer, $searchbat) !== FALSE)
+    #        $matches = $buffer;
+    #}
+   # fclose($handle);
+#}
 
-$handle = fopen("file.txt", "r");
-if ($handle)
+#$batchname = explode("-", $matches);
+
+#$searchthis1 = $batchname[1];
+
+#$handle1 = fopen("mo.txt", "r");
+#if ($handle1)
+#{
+ #   while (!feof($handle1))
+  #  {
+   #     $buffer = fgets($handle1);
+    #    if(strpos($buffer, $searchthis1) !== FALSE)
+     #       $matches1 = $buffer;
+    #}
+    #fclose($handle1);
+#}
+
+#$ks1 = explode("-", $matches1);
+$query="select emod,eunit from batch_status,student where student.batch_id =batch_status.batch_id";
+$result=mysql_query($query);
+while($row=mysql_fetch_object($result))
 {
-    while (!feof($handle))
-    {
-        $buffer = fgets($handle);
-        if(strpos($buffer, $searchbat) !== FALSE)
-            $matches = $buffer;
-    }
-    fclose($handle);
+$module=$row->emod;
+$unit=$row->eunit;
 }
-
-$batchname = explode("-", $matches);
-
-$searchthis1 = $batchname[1];
-
-$handle1 = fopen("mo.txt", "r");
-if ($handle1)
-{
-    while (!feof($handle1))
-    {
-        $buffer = fgets($handle1);
-        if(strpos($buffer, $searchthis1) !== FALSE)
-            $matches1 = $buffer;
-    }
-    fclose($handle1);
-}
-
-$ks1 = explode("-", $matches1);
-$module=$ks1[0];
-$unit=$ks1[1];
-
 //$module=$_POST['module'];
 //$unit=$_POST['unit'];
 if(!isset($_GET['submit']) )
@@ -49,7 +53,7 @@ if(!isset($_GET['submit']) )
               
 <table>
 <?php
-if($module=="1" & $unit=="unit1")
+#if($module=="1" & $unit=="unit1")
 	    {
 $_SESSION['muid']="mod1u1";
 ?>

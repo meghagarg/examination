@@ -1,17 +1,18 @@
 <?php
-$bid=$_GET['bid'];
-$file = file("mo.txt");
-$newLines = array();
-foreach ($file as $line)
-    if (preg_match("/$bid/", $line) === 0)
-        $newLines[] = chop($line);
-$newFile = implode("\n", $newLines);
-file_put_contents("mo.txt", $newFile);
+$bid=$_GET['batid'];
+include 'basic.php';
+#$file = file("mo.txt");
+#$newLines = array();
+#foreach ($file as $line)
+ #   if (preg_match("/$bid/", $line) === 0)
+  #      $newLines[] = chop($line);
+#$newFile = implode("\n", $newLines);
+#file_put_contents("mo.txt", $newFile);
 
 
-$myFile = "mo.txt";
+#$myFile = "mo.txt";
 
-$fh = fopen($myFile, 'a') or die("can't open file");
+#$fh = fopen($myFile, 'a') or die("can't open file");
 
 if(empty($_POST['submit']))
 {
@@ -89,6 +90,8 @@ function getunit(module)
   </tr>
  </table>
   <br><br>
+<input type="hidden" value="<?php echo $bid;?>" name="hfid">
+
 <input type="submit" name="submit" />
 <br><br>
 <input type="reset" value="Reset!">
@@ -103,16 +106,20 @@ else {
 $mod=$_POST[module];
 $unit=$_POST[unit];
 
-$bid=$_GET['bid'];
-echo "Updated module-unit for exam is ".$mod.' '.$unit.' for batch '.$bid;
+$id=$_POST[hfid];
 
-$mod="\n".$mod."-";
-$unit=$unit."-";
-$bid=$bid."\n";
-fwrite($fh, $mod);
-fwrite($fh, $unit);
-fwrite($fh, $bid);
-fclose($fh);
+$query1="update batch_status set emod='$mod', eunit='$unit' where batch_id=$id";
+mysql_query($query1) or die("error in query");
+echo "exam status is set for batch $id";
+#echo "Updated module-unit for exam is ".$mod.' '.$unit.' for batch '.$bid;
+
+#$mod="\n".$mod."-";
+#$unit=$unit."-";
+#$bid=$bid."\n";
+#fwrite($fh, $mod);
+#fwrite($fh, $unit);
+#fwrite($fh, $bid);
+#fclose($fh);
 
 }
 

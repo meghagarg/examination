@@ -1,23 +1,15 @@
 <?php
 session_start();
+include 'basic.php';
 $uid=$_SESSION['uid'];
-echo "Update module-unit for exam<br><br>";
-if($uid=="megha")
-{
-echo "MWF12       :";
-echo "<a href=upmo.php?bid=MWF12>Update module - unit </a><br>";
-echo "MRF61       :";
-echo "<a href=upmo.php?bid=MRF61>Update module - unit</a><br>";
-}
+      $query="select b_no,batch_id from batch,registration where trainer_id=r_no and uname='$uid' ";
+           $result=mysql_query($query) or die("error in query");
+   while ($row = mysql_fetch_object($result))
+   {
+        echo"<a href=upmo.php?batid='$row->batch_id'>$row->batch_id</a><br><br>";
+               }
+           echo"</select>";
 
-if($uid=="manishs")
-{
-echo "MMT11       :";
-echo "<a href=upmo.php?bid=MMT11>Update module - unit </a><br>";
-}
-if($uid=="manishn")
-{
-echo "MMR44      :";
-echo "<a href=upmo.php?bid=MMR44>Update module - unit</a><br>";
-}
+
+
 ?>
