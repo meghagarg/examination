@@ -31,12 +31,13 @@ include 'basic.php';
 #}
 
 #$ks1 = explode("-", $matches1);
-$query="select emod,eunit from batch_status,student where student.batch_id =batch_status.batch_id";
+$query="select mod1,mod2,mod3 from exam_module,student where student.batch_id =exam_module.batch_id and student.uname='$searchbat'";
 $result=mysql_query($query);
 while($row=mysql_fetch_object($result))
 {
-$module=$row->emod;
-$unit=$row->eunit;
+$module1=$row->mod1;
+$module2=$row->mod2;
+$module3=$row->mod3;
 }
 //$module=$_POST['module'];
 //$unit=$_POST['unit'];

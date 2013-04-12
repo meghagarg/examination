@@ -1,57 +1,34 @@
 <?php
-$dateFormat = "d F Y -- g:i a";
-$targetDate = time() + (5*60);//Change the 25 to however many minutes you want to countdown
-$actualDate = time();
-$secondsDiff = $targetDate - $actualDate;
-$remainingDay     = floor($secondsDiff/60/60/24);
-$remainingHour    = floor(($secondsDiff-($remainingDay*60*60*24))/60/60);
-$remainingMinutes = floor(($secondsDiff-($remainingDay*60*60*24)-($remainingHour*60*60))/60);
-$remainingSeconds = floor(($secondsDiff-($remainingDay*60*60*24)-($remainingHour*60*60))-($remainingMinutes*60));
-$actualDateDisplay = date($dateFormat,$actualDate);
-$targetDateDisplay = date($dateFormat,$targetDate);
-?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<head>
+#session_start();
+#$searchbat = $_SESSION['uid'];
+$searchbat="kunal77712";
+include 'basic.php';
 
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title></title>
+$query="select mod1,mod2,mod3 from exam_module,student where student.batch_id =exam_module.batch_id and student.uname='$searchbat'";
+echo $query;
+$result=mysql_query($query);
+$row=mysql_fetch_object($result);
 
-<script type="text/javascript">
-  var days = <?php echo $remainingDay; ?>  
-  var hours = <?php echo $remainingHour; ?>  
-  var minutes = <?php echo $remainingMinutes; ?>  
-  var seconds = <?php echo $remainingSeconds; ?> 
-function setCountDown ()
-{
-  seconds--;
-  if (seconds < 0){
-      minutes--;
-      seconds = 59
-  }
-  if (minutes < 0){
-      hours--;
-      minutes = 59
-  }
-  if (hours < 0){
-      days--;
-      hours = 23
-  }
-  document.getElementById("remain").innerHTML = days+" days, "+hours+" hours, "+minutes+" minutes, "+seconds+" seconds";
-  SD=window.setTimeout( "setCountDown()", 1000 );
-  if (minutes == '00' && seconds == '00') { seconds = "00"; window.clearTimeout(SD);
-   		window.alert("Time is up. Press OK to continue."); // change timeout message as required
-  		//window.location = "http://www.yourpage.com" // Add your redirect url
- 	} 
+$module1=$row->mod1;
+$module2=$row->mod2;
+$module3=$row->mod3;
 
-}
+#$module1=explode(',',$module1);
+#$module2=explode(',',$module2);
+#$module3=explode(',',$module3);
 
-</script>
-</head>
-<body onload="setCountDown();">
+if(!empty($module1))
+$module1=explode(",",$module1);
+#foreach($module1 as $i)
+#do 
+#$a="(module=1 and (unit=
+echo "not set mod1";
 
-<!--  Start Time: <?php echo $actualDateDisplay; ?><br />
- End Time:<?php echo $targetDateDisplay; ?><br /> -->
- <div id="remain"><?php echo "$remainingDay days, $remainingHour hours, $remainingMinutes minutes, $remainingSeconds seconds";?></div>
-   
-</body>
-</html>
+if(!empty($module2))
+$module2=explode(",",$module2);
+echo"not set mod2";
+
+if(!empty($module3))
+$modu3e1=explode(",",$module3);
+echo"not set mod3";
+

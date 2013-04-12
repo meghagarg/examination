@@ -6,7 +6,7 @@ $uid=$_SESSION['uid'];
            $result=mysql_query($query) or die("error in query");
    while ($row = mysql_fetch_object($result))
    {
-        echo"<a href=upmo.php?batid='$row->batch_id'>$row->batch_id</a><br><br>";
+        echo"<a href=updatexam.php?batid='$row->batch_id'>$row->batch_id</a><br><br>";
                }
            echo"</select>";
 

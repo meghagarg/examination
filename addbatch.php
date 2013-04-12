@@ -47,6 +47,11 @@ $bid=$_POST[bid];
 $tname=$_POST[tname];
 $query="insert into batch(batch_id,trainer_id) values ('$bid','$tname')";
     $result=mysql_query($query) or die("error in query");
+$query2="insert into batch_status(batch_id) values ('$bid')";
+    $result=mysql_query($query2) or die("error in query");
+$query3="insert into exam_module(batch_id) values ('$bid')";
+    $result=mysql_query($query3) or die("error in query");
+
     echo"your record added $result";
 
 #echo "your batch is added with batch id '$bid' and trainer name '$tname'";
